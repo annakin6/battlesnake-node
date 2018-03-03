@@ -43,13 +43,12 @@ app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
   var nextMove = 'left';
   ///// AVOID WALLSSSS /////
-  console.log(request["you"]);
+  console.log(JSON.stringify(request));
   ///// AVOID SELF     /////
 
   ///// GET FOOD       /////
 
   ///// EAT SSNAKEss   /////
-
 
 
   // Response data
