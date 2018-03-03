@@ -89,7 +89,7 @@ function updateGrid(snakes, food, ourSnake) {
   
   // Assigns value of our snakebody and their snake body to the grid
   for (let i = 0; i < snakes.length; i++) {
-    for (let j = 0; j < snakes.body.data.length; j++) {
+    for (let j = 0; j < snakes[i].body.data.length; j++) {
       ourGrid[snakes[i].body.data[j].x + 1][snakes[i].body.data[j].y + 1] = bodyValue;
     }
     console.log("after setting body values");
