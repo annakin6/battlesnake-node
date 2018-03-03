@@ -53,7 +53,14 @@ app.post('/start', (request, response) => {
     }
     ourGrid.push(column);
   }
+  
+// Assigns value of wall to the wall values
+  for (let i = 0; i < w + 2; i++) {
+    ourGrid[0][i] = wallValue;
+    ourGrid[h+2][i] = wallValue;
+  }
 
+  
   // Response data
   const data = {
     "color": "#FF0000",
@@ -91,6 +98,14 @@ app.post('/move', (request, response) => {
       // turn left 
     // else turn right  
   
+    
+  // Clears grid
+  /
+  
+  // Assigns value of food to ourGrid
+  
+  // Assigns value
+  
   // NOTE: Do something here to generate your move
   var moves = ['up','down','left','right'];
   var nextMove = moves[Math.floor(Math.random() * 4)];
@@ -102,7 +117,7 @@ app.post('/move', (request, response) => {
 
   ///// EAT SSNAKEss   /////
 
-
+  console.log(nextMove);
   // Response data
   const data = {
     move: nextMove, // one of: ['up','down','left','right']
@@ -115,7 +130,7 @@ app.post('/move', (request, response) => {
 // Handle POST request to '/end'
 app.post('/end', (request, response) => {
   // NOTE: Do something when game ends
-
+  return true;
 })
 
 // --- SNAKE LOGIC GOES ABOVE THIS LINE ---
