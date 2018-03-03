@@ -43,7 +43,7 @@ app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
   var nextMove = 'left';
   ///// AVOID WALLSSSS /////
-  console.log(request.you);
+  console.log(request["you"]);
   ///// AVOID SELF     /////
 
   ///// GET FOOD       /////
