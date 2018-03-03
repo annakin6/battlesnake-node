@@ -38,14 +38,30 @@ app.post('/start', (request, response) => {
 // Handle POST request to '/move'
 app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
+  var nextMove = 'up';
+  ///// AVOID WALLSSSS /////
+
+  ///// AVOID SELF     /////
+
+  ///// GET FOOD       /////
+
+  ///// EAT SSNAKEss   /////
+
+
 
   // Response data
   const data = {
-    move: 'up', // one of: ['up','down','left','right']
+    move: nextMove, // one of: ['up','down','left','right']
     taunt: 'Outta my way, snake!', // optional, but encouraged!
   }
 
   return response.json(data)
+})
+
+// Handle POST request to '/end'
+app.post('/end', (request, response) => {
+  // NOTE: Do something when game ends
+
 })
 
 // --- SNAKE LOGIC GOES ABOVE THIS LINE ---
