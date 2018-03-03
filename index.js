@@ -26,7 +26,7 @@ var h, w, gameId;
 var placeholderValue = -1;
 var wallValue = -100;
 var foodValue = 100;
-var myBodyValue = -100;
+var bodyValue = -100;
 var enemySmallerValue;
 var enemyLargerValue = -100;
 var enemyBodyValue;
@@ -54,12 +54,15 @@ app.post('/start', (request, response) => {
     ourGrid.push(column);
   }
   
-// Assigns value of wall to the wall values
+  // Assigns value of wall to the wall values
   for (let i = 0; i < w + 2; i++) {
-    ourGrid[0][i] = wallValue;
-    ourGrid[h+2][i] = wallValue;
+    ourGrid[i][0] = wallValue;
+    ourGrid[i][h+1] = wallValue;
   }
-
+  for (let i = 0; i < h + 2; i++) {
+    ourGrid[0][i] = wallValue;
+    ourGrid[w+1][i] = wallValue;
+  }
   
   // Response data
   const data = {
@@ -74,14 +77,58 @@ app.post('/start', (request, response) => {
   return response.json(data)
 })
 
+function updateGrid(snakes, food, ourSnake) {
+  // Clears grid
+  for (let i = 1; i < w + 1; i++) {
+    for (let j = 1; j < h + 1; j++)
+    ourGrid[i][j] = placeholderValue;
+  }  
+  
+  // Assigns value of our snakebody and their snake body to the grid
+  for (let i = 0; i < snakes.length; i++) {
+    for (let j = 0; j < snakes.body.data.length; j++) {
+      ourGrid[snakes[i].body.data[j].x + 1][snakes[i].body.data[j].y + 1] = bodyValue;
+    }
+    if (snakes[i].id != ourSnake.id) {
+      // Assigns value of their snake head to the grid
+      ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] = enemySmallerValue;
+    }
+  }
+    
+  // Assigns value of food to ourGrid to 
+  for (let i = 0; i < food.length; i++) {
+    ourGrid[food[i].x + 1][food[i].y + 1] = foodValue;  
+  }
+}
+
+function getNextMove(headPos) {
+  var moveVals = [{"val": ourGrid[headPos.x + 1 + 1][headPos.y + 0 + 1], "move": 'right'},
+                  {"val": ourGrid[headPos.x + 0 + 1][headPos.y - 1 + 1], "move": 'up'},
+                  {"val": ourGrid[headPos.x - 1 + 1][headPos.y + 0 + 1], "move": 'left'}, 
+                  {"val": ourGrid[headPos.x - 0 + 1][headPos.y + 1 + 1], "move": 'down'}];
+  var maxVal = wallValue;
+  var bestMove = 'up';
+  for (let i = 0; i < moveVals.length; i++) {
+    if (moveVals[i].val > maxVal) {
+      bestMove = moveVals.move;
+    }
+  }
+  // Math.max(ourGrid[headPos.x + 1 + 1][headPos.y + 0 + 1],  // right
+  //          ourGrid[headPos.x + 0 + 1][headPos.y + 1 + 1],  // up
+  //          ourGrid[headPos.x - 1 + 1][headPos.y + 0 + 1],  // left
+  //          ourGrid[headPos.x - 0 + 1][headPos.y - 1 + 1]) // down
+  
+  return bestMove;
+}
+
 // Handle POST request to '/move'
 app.post('/move', (request, response) => {
   var ourSnake = request.body.you;
-  // array of our body points
-  var ourBody = ourSnake.body.data;
+  var ourBody = ourSnake.body.data; // array of our body points
   var ourHealth = ourSnake.health;
   var ourLength = ourSnake.length;
-  // variable for the currentDirection
+  var snakes = request.body.snakes.data;
+  var food = request.body.food.data;
 
   // Turning: 
   // if next value is 0, make emergencyTurn
@@ -91,30 +138,13 @@ app.post('/move', (request, response) => {
           // chase otherSnake  
 
   // look ahead left and right for gridsize/2 
-    // turn in direction of farther safe  
-
-  // emergencyTurn
-    // if left is free
-      // turn left 
-    // else turn right  
-  
-    
-  // Clears grid
-  
-  for (let i = 1; i < w + 1; i++) {
-    for (let j = 1; j < h + 1; j++)
-    ourGrid[i][j] = placeholderValue;
-  }
-  
-  // Assigns value of food to ourGrid
-  
-  
-  
-  // Assigns value
+    // turn in direction of farther safe
+  updateGrid(snakes, food, ourSnake);
   
   // NOTE: Do something here to generate your move
-  var moves = ['up','down','left','right'];
-  var nextMove = moves[Math.floor(Math.random() * 4)];
+  // var moves = ['up','down','left','right'];
+  // var nextMove = moves[Math.floor(Math.random() * 4)];
+  var nextMove = getNextMove(ourBody[0]);
   ///// AVOID WALLSSSS /////
   
   ///// AVOID SELF     /////
