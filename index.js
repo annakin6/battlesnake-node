@@ -149,7 +149,7 @@ app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
   // var moves = ['up','down','left','right'];
   // var nextMove = moves[Math.floor(Math.random() * 4)];
-  var nextMove = getNextMove(ourBody[0]);
+  var nextMove = getNextMove(ourBody);
   ///// AVOID WALLSSSS /////
   
   ///// AVOID SELF     /////
