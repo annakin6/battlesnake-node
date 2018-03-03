@@ -179,7 +179,8 @@ app.post('/move', (request, response) => {
 // Handle POST request to '/end'
 app.post('/end', (request, response) => {
   // NOTE: Do something when game ends
-  return true;
+  console.log(request.body.dead_snakes.data[0].death.causes);
+  return response.json();
 })
 
 // --- SNAKE LOGIC GOES ABOVE THIS LINE ---
