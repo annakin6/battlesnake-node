@@ -60,7 +60,7 @@ app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
   var nextMove = 'left';
   ///// AVOID WALLSSSS /////
-  console.log(JSON.stringify(request));
+  console.log(JSON.stringify(request.body));
   ///// AVOID SELF     /////
 
   ///// GET FOOD       /////
