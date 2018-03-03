@@ -118,7 +118,7 @@ function getNextMove(headPos) {
   var bestMove = 'down';
   for (let i = 0; i < moveVals.length; i++) {
     if (moveVals[i].val > maxVal) {
-      bestMove = moveVals.move;
+      bestMove = moveVals[i].move;
       maxVal = moveVals[i].val;
     }
   }
