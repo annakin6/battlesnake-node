@@ -107,7 +107,7 @@ function getNextMove(headPos) {
                   {"val": ourGrid[headPos.x - 1 + 1][headPos.y + 0 + 1], "move": 'left'}, 
                   {"val": ourGrid[headPos.x - 0 + 1][headPos.y + 1 + 1], "move": 'down'}];
   var maxVal = wallValue;
-  var bestMove = 'up';
+  var bestMove = 'down';
   for (let i = 0; i < moveVals.length; i++) {
     if (moveVals[i].val > maxVal) {
       bestMove = moveVals.move;
@@ -132,7 +132,7 @@ app.post('/move', (request, response) => {
   var food = request.body.food.data;
 
   console.log("Our id: " + ourSnake.id);
-  console.log(ourBody[0]);
+  console.log(ourBody);
   console.log(snakes);
   
   // Turning: 
@@ -149,7 +149,7 @@ app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
   // var moves = ['up','down','left','right'];
   // var nextMove = moves[Math.floor(Math.random() * 4)];
-  var nextMove = getNextMove(ourBody);
+  var nextMove = getNextMove(ourBody[0]);
   ///// AVOID WALLSSSS /////
   
   ///// AVOID SELF     /////
