@@ -40,6 +40,23 @@ app.post('/start', (request, response) => {
 
 // Handle POST request to '/move'
 app.post('/move', (request, response) => {
+  // variable for the currentDirection
+
+  // Turning: 
+  // if next value is 0, make emergencyTurn
+  // if next board is free
+    // if otherSnake.size < thisSnake.size, otherSnake.head = value 0
+        // if otherSnake is close to another food and thisSnake.size - otherSnake.head => 1
+          // chase otherSnake  
+
+  // look ahead left and right for gridsize/2 
+    // turn in direction of farther safe  
+
+  // emergencyTurn
+    // if left is free
+      // turn left 
+    // else turn right  
+  
   // NOTE: Do something here to generate your move
   var nextMove = 'left';
   ///// AVOID WALLSSSS /////
