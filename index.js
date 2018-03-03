@@ -27,9 +27,12 @@ app.post('/start', (request, response) => {
 
   // Response data
   const data = {
-    color: '#DFFF00',
-    head_url: 'http://www.placecage.com/c/200/200', // optional, but encouraged!
-    taunt: "Let's do thisss thang!", // optional, but encouraged!
+    "color": "#FF0000",
+    "secondary_color": "#00FF00",
+    "head_url": "http://placecage.com/c/100/100",
+    "taunt": "snek",
+    "head_type": "tongue",
+    "tail_type": "pixel"
   }
 
   return response.json(data)
@@ -38,9 +41,9 @@ app.post('/start', (request, response) => {
 // Handle POST request to '/move'
 app.post('/move', (request, response) => {
   // NOTE: Do something here to generate your move
-  var nextMove = 'up';
+  var nextMove = 'left';
   ///// AVOID WALLSSSS /////
-
+  console.log(request.you);
   ///// AVOID SELF     /////
 
   ///// GET FOOD       /////
