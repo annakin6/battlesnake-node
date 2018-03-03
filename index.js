@@ -111,6 +111,7 @@ function getNextMove(headPos) {
   for (let i = 0; i < moveVals.length; i++) {
     if (moveVals[i].val > maxVal) {
       bestMove = moveVals.move;
+      maxVal = moveVals[i].val;
     }
   }
   // Math.max(ourGrid[headPos.x + 1 + 1][headPos.y + 0 + 1],  // right
