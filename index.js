@@ -81,26 +81,30 @@ function updateGrid(snakes, food, ourSnake) {
   console.log('In updateGrid: Entered function');
   // Clears grid
   for (let i = 1; i < w + 1; i++) {
-    for (let j = 1; j < h + 1; j++)
-    ourGrid[i][j] = placeholderValue;
-  }  
+    for (let j = 1; j < h + 1; j++) {
+      ourGrid[i][j] = placeholderValue;
+    }
+  }
+  console.log("After grid clearing");
   
   // Assigns value of our snakebody and their snake body to the grid
   for (let i = 0; i < snakes.length; i++) {
     for (let j = 0; j < snakes.body.data.length; j++) {
       ourGrid[snakes[i].body.data[j].x + 1][snakes[i].body.data[j].y + 1] = bodyValue;
     }
+    console.log("after setting body values");
     if (snakes[i].id != ourSnake.id) {
       // Assigns value of their snake head to the grid
       ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] = enemySmallerValue;
     }
+    console.log("after setting head value");
   }
-    
+  console.log("after snakes for loop");  
   // Assigns value of food to ourGrid to 
   for (let i = 0; i < food.length; i++) {
     ourGrid[food[i].x + 1][food[i].y + 1] = foodValue;  
+    console.log("after setting food value");
   }
-  
   console.log('In updateGrid: Grid updated');
 }
 
