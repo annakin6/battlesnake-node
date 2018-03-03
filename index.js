@@ -131,6 +131,9 @@ app.post('/move', (request, response) => {
   var snakes = request.body.snakes.data;
   var food = request.body.food.data;
 
+  console.log("Our id: " + ourSnake.id);
+  console.log(snakes);
+  
   // Turning: 
   // if next value is 0, make emergencyTurn
   // if next board is free
