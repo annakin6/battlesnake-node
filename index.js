@@ -100,9 +100,15 @@ app.post('/move', (request, response) => {
   
     
   // Clears grid
-  /
+  
+  for (let i = 1; i < w + 1; i++) {
+    for (let j = 1; j < h + 1; j++)
+    ourGrid[i][j] = placeholderValue;
+  }
   
   // Assigns value of food to ourGrid
+  
+  
   
   // Assigns value
   
