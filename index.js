@@ -66,8 +66,8 @@ app.post('/start', (request, response) => {
   
   // Response data
   const data = {
-    "color": "#FF0000",
-    "secondary_color": "#00FF00",
+    "color": "#FFF",
+    "secondary_color": "#E92693",
     "head_url": "http://placecage.com/c/100/100",
     "taunt": "snek",
     "head_type": "tongue",
