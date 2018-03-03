@@ -78,6 +78,7 @@ app.post('/start', (request, response) => {
 })
 
 function updateGrid(snakes, food, ourSnake) {
+  console.log('In updateGrid: Entered function');
   // Clears grid
   for (let i = 1; i < w + 1; i++) {
     for (let j = 1; j < h + 1; j++)
@@ -104,6 +105,7 @@ function updateGrid(snakes, food, ourSnake) {
 }
 
 function getNextMove(headPos) {
+  console.log("TOP OF GETNEXTMOVE");
   var moveVals = [{"val": ourGrid[headPos.x + 1 + 1][headPos.y + 0 + 1], "move": 'right'},
                   {"val": ourGrid[headPos.x + 0 + 1][headPos.y - 1 + 1], "move": 'up'},
                   {"val": ourGrid[headPos.x - 1 + 1][headPos.y + 0 + 1], "move": 'left'}, 
