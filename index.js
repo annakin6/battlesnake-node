@@ -99,6 +99,8 @@ function updateGrid(snakes, food, ourSnake) {
   for (let i = 0; i < food.length; i++) {
     ourGrid[food[i].x + 1][food[i].y + 1] = foodValue;  
   }
+  
+  console.log('In updateGrid: Grid updated');
 }
 
 function getNextMove(headPos) {
@@ -118,7 +120,7 @@ function getNextMove(headPos) {
   //          ourGrid[headPos.x + 0 + 1][headPos.y + 1 + 1],  // up
   //          ourGrid[headPos.x - 1 + 1][headPos.y + 0 + 1],  // left
   //          ourGrid[headPos.x - 0 + 1][headPos.y - 1 + 1]) // down
-  
+  console.log('In getNextMove: ' + bestMove);
   return bestMove;
 }
 
