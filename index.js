@@ -20,10 +20,39 @@ app.use(bodyParser.json())
 app.use(poweredByHandler)
 
 // --- SNAKE LOGIC GOES BELOW THIS LINE ---
+var h, w, gameId;
+
+// values for the grid calculations
+var placeholderValue = -1;
+var wallValue = -100;
+var foodValue = 100;
+var myBodyValue = -100;
+var enemySmallerValue;
+var enemyLargerValue = -100;
+var enemyBodyValue;
+
+// variables for snake
+var currentDirection;
+
+// Creates a grid to use that stores the "value" 
+var ourGrid = [];
 
 // Handle POST request to '/start'
 app.post('/start', (request, response) => {
   // NOTE: Do something here to start the game
+  h = request.body.height;
+  w = request.body.width;
+  gameId = request.body.width;
+
+  // Add w +2 columns to our grid. 
+  for (let i = 0; i < w + 2; i++) {
+    var column = [];
+    // Add h + 2 rows to our column
+    for (let j = 0; j < h + 2; j++) {
+      column.push(placeholderValue);
+    }
+    ourGrid.push(column);
+  }
 
   // Response data
   const data = {
@@ -40,6 +69,11 @@ app.post('/start', (request, response) => {
 
 // Handle POST request to '/move'
 app.post('/move', (request, response) => {
+  var ourSnake = request.body.you;
+  // array of our body points
+  var ourBody = ourSnake.body.data;
+  var ourHealth = ourSnake.health;
+  var ourLength = ourSnake.length;
   // variable for the currentDirection
 
   // Turning: 
@@ -58,9 +92,10 @@ app.post('/move', (request, response) => {
     // else turn right  
   
   // NOTE: Do something here to generate your move
-  var nextMove = 'left';
+  var moves = ['up','down','left','right'];
+  var nextMove = moves[Math.floor(Math.random() * 4)];
   ///// AVOID WALLSSSS /////
-  console.log(JSON.stringify(request.body));
+  
   ///// AVOID SELF     /////
 
   ///// GET FOOD       /////
