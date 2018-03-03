@@ -132,6 +132,7 @@ app.post('/move', (request, response) => {
   var food = request.body.food.data;
 
   console.log("Our id: " + ourSnake.id);
+  console.log(ourBody[0]);
   console.log(snakes);
   
   // Turning: 
