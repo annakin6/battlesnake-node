@@ -108,23 +108,11 @@ app.post('/start', (request, response) => {
   // Assigns value of wall to the wall values
   for (let i = 0; i < w + 2; i++) {
     ourGrid[i][0] = wallValue;
-    if(ourGrid[i+1][1] != null) {
-      ourGrid[i+1][1] = wallValue / 2;
-    }
     ourGrid[i][h+1] = wallValue;
-    if(ourGrid[i+1][h] != null) {
-      ourGrid[i+1][h] = wallValue / 2;
-    }
   }
   for (let i = 0; i < h + 2; i++) {
     ourGrid[0][i] = wallValue;
-    if(ourGrid[1][i+1] != null) {
-      ourGrid[1][i+1] = wallValue / 2;
-    } 
     ourGrid[w+1][i] = wallValue;
-    if(ourGrid[w][i+1] != null) {
-      ourGrid[w][i+1] = wallValue / 2;
-    } 
   }
   
   // Response data
@@ -193,6 +181,28 @@ function updateGrid(snakes, food, ourSnake) {
     ourGrid[food[i].x + 1][food[i].y + 1] += foodValue;
     setSurroundingValues(food[i].x + 1, food[i].y + 1, foodValue, 3);
     console.log("after setting food value");
+  }
+
+  // Assigns value of wall to the wall values
+  for (let i = 0; i < w + 2; i++) {
+    ourGrid[i][0] = wallValue;
+    if(ourGrid[i+1][1] != null) {
+      ourGrid[i+1][1] += wallValue / 2;
+    }
+    ourGrid[i][h+1] = wallValue;
+    if(ourGrid[i+1][h] != null) {
+      ourGrid[i+1][h] += wallValue / 2;
+    }
+  }
+  for (let i = 0; i < h + 2; i++) {
+    ourGrid[0][i] = wallValue;
+    if(ourGrid[1][i+1] != null) {
+      ourGrid[1][i+1] += wallValue / 2;
+    } 
+    ourGrid[w+1][i] = wallValue;
+    if(ourGrid[w][i+1] != null) {
+      ourGrid[w][i+1] += wallValue / 2;
+    } 
   }
   console.log('In updateGrid: Grid updated');
 }
