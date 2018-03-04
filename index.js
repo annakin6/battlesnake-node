@@ -131,8 +131,8 @@ app.post('/start', (request, response) => {
   const data = {
     "color": "#FFF",
     "secondary_color": "#E92693",
-    "head_url": "http://placecage.com/c/100/100",
-    "taunt": "snek",
+    "head_url": "https://cdn.glitch.com/676c5ee6-9d73-47ee-94ce-ba1439d344b4%2Fwilsonake.png?1520123328467",
+    "taunt": "I don’t like sand. It’s coarse and rough and irritating and it gets everywhere.",
     "head_type": "tongue",
     "tail_type": "round-bum"
   }
