@@ -140,6 +140,14 @@ app.post('/start', (request, response) => {
   return response.json(data)
 })
 
+function setSurroundingValues(x, y, originalValue) {
+  ourGrid[x + 1][y + 0] += originalValue/2;
+  ourGrid[x + 0][y - 1] += originalValue/2;
+  ourGrid[x - 1][y + 0] += originalValue/2;
+  ourGrid[x - 0][y + 1] += originalValue/2;
+}
+
+
 function updateGrid(snakes, food, ourSnake) {
   console.log('In updateGrid: Entered function');
   // Clears grid
@@ -153,15 +161,18 @@ function updateGrid(snakes, food, ourSnake) {
   // Assigns value of our snakebody and their snake body to the grid
   for (let i = 0; i < snakes.length; i++) {
     for (let j = 0; j < snakes[i].body.data.length; j++) {
-      ourGrid[snakes[i].body.data[j].x + 1][snakes[i].body.data[j].y + 1] = bodyValue;
+      ourGrid[snakes[i].body.data[j].x + 1][snakes[i].body.data[j].y + 1] += bodyValue;
     }
     console.log("after setting body values");
+
     if (snakes[i].id != ourSnake.id) {
       // Assigns value of their snake head to the grid, based on size of snake
       if(snakes[i].length < ourSnake.length) {
-        ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] = enemySmallerValue;
+        ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] += enemySmallerValue;
+        setSurroundingValues(snakes[i].body.data[0].x + 1,snakes[i].body.data[0].y + 1, enemySmallerValue);
       } else {
-        ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] = enemyLargerValue;
+        ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] += enemyLargerValue;
+        setSurroundingValues(snakes[i].body.data[0].x + 1,snakes[i].body.data[0].y + 1, enemyLargerValue);
       }
     }
     console.log("after setting head value");
@@ -169,7 +180,7 @@ function updateGrid(snakes, food, ourSnake) {
   console.log("after snakes for loop");  
   // Assigns value of food to ourGrid to 
   for (let i = 0; i < food.length; i++) {
-    ourGrid[food[i].x + 1][food[i].y + 1] = foodValue;  
+    ourGrid[food[i].x + 1][food[i].y + 1] += foodValue;  
     console.log("after setting food value");
   }
   console.log('In updateGrid: Grid updated');
