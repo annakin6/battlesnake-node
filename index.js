@@ -142,10 +142,18 @@ app.post('/start', (request, response) => {
 
 function setSurroundingValues(x, y, originalValue, iters) {
   for (let i = 1; i < iters; i++) {
-    ourGrid[x + i][y + 0] += originalValue/(i+1);
-    ourGrid[x + 0][y - i] += originalValue/(i+1);
-    ourGrid[x - i][y + 0] += originalValue/(i+1);
-    ourGrid[x - 0][y + i] += originalValue/(i+1);
+    if(ourGrid[x + i][y + 0] != null) {
+      ourGrid[x + i][y + 0] += originalValue/(i+1);
+    }
+    if(ourGrid[x + 0][y - i] != null) {
+      ourGrid[x + 0][y - i] += originalValue/(i+1);
+    }
+    if(ourGrid[x - i][y + 0] != null) {
+      ourGrid[x - i][y + 0] += originalValue/(i+1);
+    }
+    if(ourGrid[x - 0][y + i] != null) {
+      ourGrid[x - 0][y + i] += originalValue/(i+1);
+    }
   }
 }
 
