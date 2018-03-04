@@ -140,11 +140,13 @@ app.post('/start', (request, response) => {
   return response.json(data)
 })
 
-function setSurroundingValues(x, y, originalValue) {
-  ourGrid[x + 1][y + 0] += originalValue/2;
-  ourGrid[x + 0][y - 1] += originalValue/2;
-  ourGrid[x - 1][y + 0] += originalValue/2;
-  ourGrid[x - 0][y + 1] += originalValue/2;
+function setSurroundingValues(x, y, originalValue, iters) {
+  for (let i = 1; i < iters; i++) {
+    ourGrid[x + i][y + 0] += originalValue/(i+1);
+    ourGrid[x + 0][y - i] += originalValue/(i+1);
+    ourGrid[x - i][y + 0] += originalValue/(i+1);
+    ourGrid[x - 0][y + i] += originalValue/(i+1);
+  }
 }
 
 
@@ -169,10 +171,10 @@ function updateGrid(snakes, food, ourSnake) {
       // Assigns value of their snake head to the grid, based on size of snake
       if(snakes[i].length < ourSnake.length) {
         ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] += enemySmallerValue;
-        setSurroundingValues(snakes[i].body.data[0].x + 1,snakes[i].body.data[0].y + 1, enemySmallerValue);
+        setSurroundingValues(snakes[i].body.data[0].x + 1,snakes[i].body.data[0].y + 1, enemySmallerValue, 1);
       } else {
         ourGrid[snakes[i].body.data[0].x + 1][snakes[i].body.data[0].y + 1] += enemyLargerValue;
-        setSurroundingValues(snakes[i].body.data[0].x + 1,snakes[i].body.data[0].y + 1, enemyLargerValue);
+        setSurroundingValues(snakes[i].body.data[0].x + 1,snakes[i].body.data[0].y + 1, enemyLargerValue, 1);
       }
     }
     console.log("after setting head value");
@@ -180,7 +182,8 @@ function updateGrid(snakes, food, ourSnake) {
   console.log("after snakes for loop");  
   // Assigns value of food to ourGrid to 
   for (let i = 0; i < food.length; i++) {
-    ourGrid[food[i].x + 1][food[i].y + 1] += foodValue;  
+    ourGrid[food[i].x + 1][food[i].y + 1] += foodValue;
+    setSurroundingValues(food[i].x + 1, food[i].y + 1, foodValue, 3);
     console.log("after setting food value");
   }
   console.log('In updateGrid: Grid updated');
