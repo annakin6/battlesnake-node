@@ -129,31 +129,10 @@ app.post('/start', (request, response) => {
 })
 
 function setSurroundingValues(x, y, originalValue, iters) {
-  if(x + 1 < w + 2) {
-    ourGrid[x + 1][y + 0] += originalValue/2;
-  }
-  if(y - 1 > 0) {
-    ourGrid[x + 0][y - 1] += originalValue/2;
-  }
-  if(x - 1 > 0) {
-    ourGrid[x - 1][y + 0] += originalValue/2;
-  }
-  if(y + 1 < h + 2) {
-    ourGrid[x - 0][y + 1] += originalValue/2;
-  }
-
-  if(x + 2 < w + 2) {
-    ourGrid[x + 2][y + 0] += originalValue/4;
-  }
-  if(y - 2 > 0) {
-    ourGrid[x + 0][y - 2] += originalValue/4;
-  }
-  if(x - 2 > 0) {
-    ourGrid[x - 1][y + 0] += originalValue/4;
-  }
-  if(y + 2 < h + 2) {
-    ourGrid[x - 0][y + 2] += originalValue/4;
-  }
+  ourGrid[x + 1][y + 0] += originalValue/2;
+  ourGrid[x + 0][y - 1] += originalValue/2;
+  ourGrid[x - 1][y + 0] += originalValue/2;
+  ourGrid[x - 0][y + 1] += originalValue/2;
 }
 // function setSurroundingValues(x, y, originalValue, iters) {
 //   for (let i = 1; i < iters; i++) {
