@@ -129,21 +129,27 @@ app.post('/start', (request, response) => {
 })
 
 function setSurroundingValues(x, y, originalValue, iters) {
-  for (let i = 1; i < iters; i++) {
-    if(ourGrid[x + i][y + 0] != null) {
-      ourGrid[x + i][y + 0] += originalValue/(i+1);
-    }
-    if(ourGrid[x + 0][y - i] != null) {
-      ourGrid[x + 0][y - i] += originalValue/(i+1);
-    }
-    if(ourGrid[x - i][y + 0] != null) {
-      ourGrid[x - i][y + 0] += originalValue/(i+1);
-    }
-    if(ourGrid[x - 0][y + i] != null) {
-      ourGrid[x - 0][y + i] += originalValue/(i+1);
-    }
-  }
+  ourGrid[x + 1][y + 0] += originalValue/2;
+  ourGrid[x + 0][y - 1] += originalValue/2;
+  ourGrid[x - 1][y + 0] += originalValue/2;
+  ourGrid[x - 0][y + 1] += originalValue/2;
 }
+// function setSurroundingValues(x, y, originalValue, iters) {
+//   for (let i = 1; i < iters; i++) {
+//     if(ourGrid[x + i][y + 0] != null) {
+//       ourGrid[x + i][y + 0] += originalValue/(i+1);
+//     }
+//     if(ourGrid[x + 0][y - i] != null) {
+//       ourGrid[x + 0][y - i] += originalValue/(i+1);
+//     }
+//     if(ourGrid[x - i][y + 0] != null) {
+//       ourGrid[x - i][y + 0] += originalValue/(i+1);
+//     }
+//     if(ourGrid[x - 0][y + i] != null) {
+//       ourGrid[x - 0][y + i] += originalValue/(i+1);
+//     }
+//   }
+// }
 
 
 function updateGrid(snakes, food, ourSnake) {
