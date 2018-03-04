@@ -112,14 +112,19 @@ app.post('/start', (request, response) => {
       ourGrid[i+1][1] = wallValue / 2;
     }
     ourGrid[i][h+1] = wallValue;
-    if(ourGrid[i+1][h-1] != null) {
-      ourGrid[i+1][h-1] = wallValue / 2;
+    if(ourGrid[i+1][h] != null) {
+      ourGrid[i+1][h] = wallValue / 2;
     }
   }
   for (let i = 0; i < h + 2; i++) {
     ourGrid[0][i] = wallValue;
-    ourGrid[1][i+1] = 
+    if(ourGrid[1][i+1] != null) {
+      ourGrid[1][i+1] = wallValue / 2;
+    } 
     ourGrid[w+1][i] = wallValue;
+    if(ourGrid[w][i+1] != null) {
+      ourGrid[w][i+1] = wallValue / 2;
+    } 
   }
   
   // Response data
@@ -129,7 +134,7 @@ app.post('/start', (request, response) => {
     "head_url": "http://placecage.com/c/100/100",
     "taunt": "snek",
     "head_type": "tongue",
-    "tail_type": "pixel"
+    "tail_type": "round-bum"
   }
 
   return response.json(data)
